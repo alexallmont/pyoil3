@@ -89,6 +89,7 @@ macro_rules! pyoil3_ref_class {
                 pub ref_static: super::$RustType<'static>,
                 pub owner: Arc<Mutex<super::$OwnerHandle::RustInstance>>
             }
+
             unsafe impl Send for RustInstance {}
             unsafe impl Sync for RustInstance {}
 
@@ -97,8 +98,8 @@ macro_rules! pyoil3_ref_class {
             pub struct PyClass(pub Arc<Mutex<RustInstance>>);
 
             impl PyClass {
-                pub fn bind_owned_instance<'a>(
-                    reference: super::$RustType<'a>,
+                pub fn bind_owned_instance(
+                    reference: super::$RustType,
                     owner: Arc<Mutex<super::$OwnerHandle::RustInstance>>
                 ) -> PyClass {
                     let ref_static: super::$RustType<'static> = unsafe {
